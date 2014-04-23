@@ -1,0 +1,207 @@
+Aircraft
+Alamein
+Albion
+Alphington
+Altona
+Anstey
+Armadale
+Ascot Vale
+Ashburton
+Aspendale
+Auburn
+Balaclava
+Batman
+Bayswater
+Beaconsfield
+Belgrave
+Bell
+Bentleigh
+Berwick
+Blackburn
+Bonbeach
+Boronia
+Box Hill
+Brighton Beach
+Broadmeadows
+Brunswick
+Burnley
+Burwood
+Camberwell
+Canterbury
+Cardinia Road
+Carnegie
+Carrum
+Caulfield
+Chatham
+Chelsea
+Cheltenham
+Clayton
+Clifton Hill
+Coburg
+Collingwood
+Coolaroo
+Craigieburn
+Cranbourne
+Croxton
+Croydon
+Dandenong
+Darebin
+Darling
+Dennis
+Diamond Creek
+Eaglemont
+East Camberwell
+East Malvern
+East Richmond
+Edithvale
+Elsternwick
+Eltham
+Epping
+Essendon
+Fairfield
+Fawkner
+Ferntree Gully
+Flagstaff
+Flemington Bridge
+Flemington Racecourse
+Flinders Street
+Footscray
+Frankston
+Gardenvale
+Gardiner
+Ginifer
+Glen Iris
+Glen Waverley
+Glenbervie
+Glenferrie
+Glenhuntly
+Glenroy
+Gowrie
+Greensborough
+Hallam
+Hampton
+Hartwell
+Hawksburn
+Hawthorn
+Heatherdale
+Heathmont
+Heidelberg
+Heyington
+Highett
+Holmesglen
+Hoppers Crossing
+Hughesdale
+Huntingdale
+Hurstbridge
+Ivanhoe
+Jacana
+Jewell
+Jolimont
+Jordanville
+Kananook
+Keilor Plains
+Kensington
+Keon Park
+Kooyong
+Laburnum
+Lalor
+Laverton
+Lilydale
+Lynbrook
+Macaulay
+Macleod
+Malvern
+Mckinnon
+Melbourne Central
+Mentone
+Merinda Park
+Merlynston
+Merri
+Middle Brighton
+Middle Footscray
+Mitcham
+Mont Albert
+Montmorency
+Moonee Ponds
+Moorabbin
+Mooroolbark
+Mordialloc
+Moreland
+Mount Waverley
+Murrumbeena
+Narre Warren
+Newmarket
+Newport
+Noble Park
+North Brighton
+North Melbourne
+North Richmond
+North Williamstown
+Northcote
+Nunawading
+Oak Park
+Oakleigh
+Officer
+Ormond
+Pakenham
+Parkdale
+Parliament
+Pascoe Vale
+Patterson
+Prahran
+Preston
+Regent
+Reservoir
+Richmond
+Ringwood
+Ringwood East
+Ripponlea
+Riversdale
+Rosanna
+Roxburgh Park
+Royal Park
+Rushall
+Ruthven
+Sandown Park
+Sandringham
+Seaford
+Seaholme
+Seddon
+Showgrounds
+South Kensington
+South Morang
+South Yarra
+Southern Cross
+Spotswood
+Springvale
+St Albans
+Strathmore
+Sunshine
+Surrey Hills
+Syndal
+Tecoma
+Thomastown
+Thornbury
+Toorak
+Tooronga
+Tottenham
+Upfield
+Upper Ferntree Gully
+Upwey
+Victoria Park
+Watergardens
+Watsonia
+Wattle Glen
+Werribee
+West Footscray
+West Richmond
+Westall
+Westgarth
+Westona
+Williams Landing
+Williamstown
+Williamstown Beach
+Willison
+Windsor
+Yarraman
+Yarraville
