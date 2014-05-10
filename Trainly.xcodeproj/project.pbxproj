@@ -39,6 +39,9 @@
 		FAC03D8A18DE6B6900FC43B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC03D6C18DE6B6900FC43B7 /* UIKit.framework */; };
 		FAC03D9218DE6B6900FC43B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAC03D9018DE6B6900FC43B7 /* InfoPlist.strings */; };
 		FAC03D9418DE6B6900FC43B7 /* TrainlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC03D9318DE6B6900FC43B7 /* TrainlyTests.m */; };
+		FACC2953190B3F5200CD5CBD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC2952190B3F5200CD5CBD /* Social.framework */; };
+		FACC2955190B3F5800CD5CBD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC2954190B3F5800CD5CBD /* Accounts.framework */; };
+		FACC2957190B4A3A00CD5CBD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACC2956190B4A3A00CD5CBD /* MessageUI.framework */; };
 		FACE93FC18EF82BB001795DB /* melbourne_stations_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = FACE93FB18EF82BB001795DB /* melbourne_stations_list.txt */; };
 		FAD7E2E918EECC5C00DEE9BD /* TLPinStationOnMapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD7E2E818EECC5C00DEE9BD /* TLPinStationOnMapViewDelegate.m */; };
 		FAF04BC318DEED6E009348E8 /* transport_method_bike.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF04BC018DEED6E009348E8 /* transport_method_bike.png */; };
@@ -91,6 +94,7 @@
 		FAA5DEBF18E55353000886AB /* TLMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLMasterViewController.m; sourceTree = "<group>"; };
 		FAB4459818E81310001E397D /* TLSearchForStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSearchForStationViewController.h; sourceTree = "<group>"; };
 		FAB4459918E81310001E397D /* TLSearchForStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSearchForStationViewController.m; sourceTree = "<group>"; };
+		FABBBD2C191DBF1500108224 /* TLViewPerformsTimetableRetrievalRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLViewPerformsTimetableRetrievalRequest.h; sourceTree = "<group>"; };
 		FABD816019052D170079E31C /* TrainlyIcon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TrainlyIcon120x120.png; sourceTree = "<group>"; };
 		FAC03D6518DE6B6900FC43B7 /* Trainly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trainly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC03D6818DE6B6900FC43B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,6 +113,9 @@
 		FAC03D8F18DE6B6900FC43B7 /* TrainlyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrainlyTests-Info.plist"; sourceTree = "<group>"; };
 		FAC03D9118DE6B6900FC43B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FAC03D9318DE6B6900FC43B7 /* TrainlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainlyTests.m; sourceTree = "<group>"; };
+		FACC2952190B3F5200CD5CBD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		FACC2954190B3F5800CD5CBD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		FACC2956190B4A3A00CD5CBD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FACE93FB18EF82BB001795DB /* melbourne_stations_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = melbourne_stations_list.txt; sourceTree = "<group>"; };
 		FAD7E2E718EECC5C00DEE9BD /* TLPinStationOnMapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPinStationOnMapViewDelegate.h; sourceTree = "<group>"; };
 		FAD7E2E818EECC5C00DEE9BD /* TLPinStationOnMapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPinStationOnMapViewDelegate.m; sourceTree = "<group>"; };
@@ -122,6 +129,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACC2957190B4A3A00CD5CBD /* MessageUI.framework in Frameworks */,
+				FACC2955190B3F5800CD5CBD /* Accounts.framework in Frameworks */,
+				FACC2953190B3F5200CD5CBD /* Social.framework in Frameworks */,
 				FA12452E18E4E228004B67DD /* MapKit.framework in Frameworks */,
 				FAC03D6B18DE6B6900FC43B7 /* CoreGraphics.framework in Frameworks */,
 				FAC03D6D18DE6B6900FC43B7 /* UIKit.framework in Frameworks */,
@@ -264,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				FA99AA5A18F3686700EFC2D4 /* TLViewPerformsStationGetInfoRequest.h */,
+				FABBBD2C191DBF1500108224 /* TLViewPerformsTimetableRetrievalRequest.h */,
 				FA99AA5B18F36AA700EFC2D4 /* TLViewPerformsAddingFavouriteStationRequest.h */,
 				FA8F714A18F22A44008D7688 /* TLViewUsesStationData.h */,
 				FA8F714B18F22A44008D7688 /* TLViewUsesStationData.m */,
@@ -299,6 +310,9 @@
 		FAC03D6718DE6B6900FC43B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FACC2956190B4A3A00CD5CBD /* MessageUI.framework */,
+				FACC2954190B3F5800CD5CBD /* Accounts.framework */,
+				FACC2952190B3F5200CD5CBD /* Social.framework */,
 				FA12452D18E4E228004B67DD /* MapKit.framework */,
 				FAC03D6818DE6B6900FC43B7 /* Foundation.framework */,
 				FAC03D6A18DE6B6900FC43B7 /* CoreGraphics.framework */,

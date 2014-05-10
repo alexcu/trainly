@@ -37,7 +37,6 @@
  * @param allowsEditing   Whether or not the stations can be edited
  */
 -(id) initWithAnArrayOfStations:(NSArray*) stations
-             fromViewController:(UIViewController*) viewController
                   allowsEditing:(BOOL) editing;
 
 /**

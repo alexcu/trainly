@@ -4,7 +4,7 @@
  * @date    2014-03-30
  */
 @interface TLSearchForStationViewController : UITableViewController
-  < UISearchBarDelegate, UISearchDisplayDelegate>
+  <UISearchBarDelegate, UISearchDisplayDelegate>
 {
   /// The list of stations I will allow searching for
   NSArray*  _searchStations;

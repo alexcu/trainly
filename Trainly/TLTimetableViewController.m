@@ -8,16 +8,6 @@
   /// The controller/delegate
   TLGenericTableViewDelegateAndDatasource* _runTableViewDelegate;
 }
-/**
- * Success method for loading station data will set up _runTableViewDelegate
- * @param notification  The directions data notification
- */
--(void) didSuccessfullyLoadTimetableData:(NSNotification*) notification;
-/**
- * Failure method for unsucessfully loading timetable data
- * @param notification  The error message notification
- */
--(void) didFailLoadTimetableData:(NSNotification*) notification;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
 @property (weak, nonatomic) IBOutlet UITableView *runTableView;
 @end
@@ -111,7 +101,9 @@
   
   NSMutableArray* displayableTimes = [[NSMutableArray alloc] init];
   NSInteger rowForClosestTime = 0;
-  NSTimeInterval closestMatchingTime = [data[0][@"departureTime"] timeIntervalSinceNow];
+
+  // Whether we've jumped or not
+  BOOL timeSet = NO;
   
   // Now that we have the data, change it to display title...
   for (NSDictionary* timetable in data)
@@ -119,13 +111,15 @@
     [displayableTimes addObject:@{@"title":[dateToPrettyStr stringFromDate:timetable[@"departureTime"]],
                                   @"subtitle":timetable[@"expressStatus"]}];
     // Jump to the cell whose closest time matches now---firstly find the closest time to now
-    if([timetable[@"departureTime"] timeIntervalSinceNow] > closestMatchingTime)
+    if([timetable[@"departureTime"] timeIntervalSinceNow] > 0 && !timeSet)
     {
-      closestMatchingTime = [timetable[@"departureTime"] timeIntervalSinceNow];
+      timeSet = YES;
       rowForClosestTime = [data indexOfObject:timetable];
     }
-    
   }
+  
+  // Assign departure times
+  _departureTimes = data;
   
   // Kill the spinner
   [TLViewLoaderSpinner stopSpinner];
@@ -137,7 +131,7 @@
   _runTableViewDelegate = [[TLGenericTableViewDelegateAndDatasource alloc]
                                   initWithOneSectionData:displayableTimes
                                   sectionIdentifier:@"PrototypeTimetableTimeCell"];
-  [_runTableView setDelegate:_runTableViewDelegate];
+  [_runTableView setDelegate:self];
   [_runTableView setDataSource:_runTableViewDelegate];
   [_runTableView reloadData];
   
@@ -145,7 +139,30 @@
   [_runTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rowForClosestTime inSection:0]
                        atScrollPosition:UITableViewScrollPositionTop
                                animated:YES];
+}
+
+#pragma mark - UITableViewDelegate protocol
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  // Find train departure time
+  NSDate* deptTime = [_departureTimes objectAtIndex:[indexPath row]][@"departureTime"];
+  // Setup notification on tap
+  UILocalNotification* notif = [[UILocalNotification alloc] init];
   
+  NSDateFormatter* dateToPrettyStr = [[NSDateFormatter alloc] init];
+  [dateToPrettyStr setFormatterBehavior:NSDateFormatterBehavior10_4];
+  [dateToPrettyStr setDateStyle:NSDateFormatterNoStyle];
+  [dateToPrettyStr setTimeStyle:NSDateFormatterShortStyle];
+  
+  // Notification body
+  NSString* notifBody = [NSString stringWithFormat:@"The %@ %@ has left %@.",
+                         [dateToPrettyStr stringFromDate:deptTime],
+                         [_directionData objectForKey:@"direction_name"],
+                         [_trainStationData name]];
+  [notif setAlertBody:notifBody];
+  [notif setFireDate:deptTime];
+  [[UIApplication sharedApplication] scheduleLocalNotification:notif];
 }
 
 @end

@@ -42,7 +42,7 @@
     _searchStations = [self loadSearchableStations];
   
   // Setup table view delegate and datasource with search stations data
-  _searchViewDelegate = [[TLTrainStationTableViewDelegateAndDatasource alloc] initWithAnArrayOfStations:_searchStations fromViewController:self allowsEditing:NO];
+  _searchViewDelegate = [[TLTrainStationTableViewDelegateAndDatasource alloc] initWithAnArrayOfStations:_searchStations allowsEditing:NO];
   
   // Set the data source and delegate to the delegate defined above
   [_searchTable setDataSource:_searchViewDelegate];
@@ -52,8 +52,11 @@
   [_searchBar setDelegate:self];
   
   // Set _searchDDS as the delegate and data source for the search controller
+  _searchController = [[UISearchDisplayController alloc]
+                       initWithSearchBar:_searchBar contentsController:self];
   [_searchController setSearchResultsDataSource:_searchViewDelegate];
   [_searchController setSearchResultsDelegate:_searchViewDelegate];
+  [_searchController setDelegate:self];
 }
 
 
@@ -104,17 +107,21 @@
   for (NSString* stationName in _searchStations)
   {
     // Match found!
-    if ([[stationName uppercaseString] rangeOfString:[searchText uppercaseString]].location != NSNotFound)
+    if ([[stationName uppercaseString]
+         rangeOfString:[searchText uppercaseString]].location != NSNotFound)
     {
       [retVal addObject:stationName];
     }
   }
-  
   // Reinitalise the _searchDDS to reflect this information
   [_searchViewDelegate updateData:retVal];
   // Force override display sectiond data to off (i.e., don't aggregate if searching)
   [_searchViewDelegate setShouldSplitIntoSections:NO];
+  [[_searchController searchResultsTableView] setDataSource:_searchViewDelegate];
+  [[_searchController searchResultsTableView] setDelegate:_searchViewDelegate];
+  [[_searchController searchResultsTableView] reloadData];
 }
+
 
 #pragma mark - Navigation
 

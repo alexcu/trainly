@@ -58,7 +58,7 @@ static NSMutableArray* activeRequests;
 -(void) postSuccessNotificationWithData:(id) data;
 /**
  * Posts a failure notificiation with data to observers
- * @param data  The data to post success with
+ * @param error  The data to post failure with
  */
 -(void) postFailureNotificationWithError:(id) error;
 /**
@@ -101,7 +101,7 @@ static NSMutableArray* activeRequests;
  * Sends a PTV Healthcheck Request to confirm backend health.
  * This should always be run on any new TLPTVRequest
  * @param url       The url to call if healthcheck is OK
- * @param selector  The selector to be invoked for the callback of the url request
+ * @param callback  The selector to be invoked for the callback of the url request
  * @param cacheID   The identifier to cache this request under
  */
 -(void) requestHealthcheckAndIfOKRequestURL:(NSURL*) url
@@ -635,15 +635,14 @@ static NSMutableArray* activeRequests;
   for (NSDictionary* run in data[@"values"])
   {
     // Given this was a station in the direction we wanted?
-    if (run[@"platform"][@"direction"][@"direction_id"] == directionToFilter)
+    if ([run[@"platform"][@"direction"][@"direction_id"] isEqualToNumber:directionToFilter])
     {
       NSDate* date = [isoToDate dateFromString:run[@"time_timetable_utc"]];
-      BOOL isExpress = [run[@"run"][@"num_skipped"] integerValue] > 0;
-      NSLog(@"isExpress=%hhd", isExpress);
+      NSInteger skips = [run[@"run"][@"num_skipped"] integerValue];
       NSDictionary* retRun = @{
                                 @"departureTime": date,
-                                @"expressStatus": isExpress ?
-                                @"Limited Express" : @"All Stations"
+                                @"expressStatus": skips > 0 ?
+                                (skips > 3 ? @"Express" : @"Limited Express") : @"All Stations"
                                };
   
   

@@ -114,7 +114,7 @@
                     <connections>
                         <outlet property="directionsTableView" destination="H48-Vm-6jc" id="IEX-xT-LMs"/>
                         <outlet property="navigationBar" destination="rMm-aD-xuw" id="REs-bt-v50"/>
-                        <segue destination="nUv-P9-X4y" kind="unwind" identifier="failedToGetStationInfo" unwindAction="unwindByWarningUser:withAlertMessage:" id="EZx-Nh-V5L"/>
+                        <segue destination="nUv-P9-X4y" kind="unwind" identifier="failedToGetStationInfo" unwindAction="unwindByCancellingToFavouriteStations:" id="EZx-Nh-V5L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxb-EL-KbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -139,11 +139,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrototypeTimetableTimeCell" textLabel="AGt-Ai-pRE" detailTextLabel="JHa-T6-YDz" style="IBUITableViewCellStyleValue1" id="qHX-ke-YfD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrototypeTimetableTimeCell" textLabel="AGt-Ai-pRE" detailTextLabel="JHa-T6-YDz" style="IBUITableViewCellStyleValue1" id="qHX-ke-YfD">
                                         <rect key="frame" x="0.0" y="86" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHX-ke-YfD" id="ZVV-o9-PB2">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="&lt;Time>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AGt-Ai-pRE">
@@ -154,7 +154,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="&lt;ExpressStatus>" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JHa-T6-YDz">
-                                                    <rect key="frame" x="168" y="17" width="117" height="18"/>
+                                                    <rect key="frame" x="188" y="17" width="117" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -191,9 +191,6 @@
                             <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="KaX-cm-NEp" id="15y-y7-J3U"/>
-                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrototypeStationCell" textLabel="8Sa-Xv-Drc" style="IBUITableViewCellStyleDefault" id="a2n-2j-iWF">
@@ -240,7 +237,7 @@
                 <exit id="ThD-5t-Kkb" userLabel="Exit" sceneMemberID="exit"/>
                 <searchDisplayController id="nKh-W7-FQm">
                     <connections>
-                        <outlet property="delegate" destination="KaX-cm-NEp" id="R4B-Pj-fkp"/>
+                        <outlet property="delegate" destination="172-iw-mry" id="pYh-9p-Xbh"/>
                         <outlet property="searchBar" destination="JfP-zX-xrt" id="BnU-eO-R4E"/>
                         <outlet property="searchContentsController" destination="KaX-cm-NEp" id="AxT-oL-Uho"/>
                         <outlet property="searchResultsDataSource" destination="KaX-cm-NEp" id="2eF-jU-hKn"/>
@@ -284,6 +281,9 @@
                                     <barButtonItem systemItem="flexibleSpace" id="Qou-Oq-vE8"/>
                                     <barButtonItem systemItem="action" id="HCG-aJ-tdy">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="actionSheet:" destination="Vpf-Nf-S5M" id="IUc-nZ-UUq"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.65392547850000005" green="0.74454140660000001" blue="0.79247736930000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -297,7 +297,7 @@
                         <outlet property="bottomBar" destination="qoA-45-U7a" id="WAB-ay-B6w"/>
                         <outlet property="stationLocationMap" destination="Gda-1t-AAp" id="VOi-MP-U4t"/>
                         <outlet property="stationNameButton" destination="s5R-gt-uQW" id="2BP-pt-8O7"/>
-                        <segue destination="y2q-2m-I5m" kind="unwind" identifier="failedToGetStationInfo" unwindAction="unwindByWarningUser:withAlertMessage:" id="8wZ-Bt-bHy"/>
+                        <segue destination="y2q-2m-I5m" kind="unwind" identifier="failedToGetStationInfo" unwindAction="unwindByCancellingToFavouriteStations:" id="8wZ-Bt-bHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JRs-cp-tLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -508,6 +508,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="NdN-p4-MjC"/>
+        <segue reference="RnR-7h-Dmx"/>
     </inferredMetricsTieBreakers>
 </document>

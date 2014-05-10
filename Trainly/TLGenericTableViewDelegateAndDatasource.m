@@ -1,5 +1,18 @@
 #import "TLGenericTableViewDelegateAndDatasource.h"
 
+@interface TLGenericTableViewDelegateAndDatasource ()
+/**
+ * Validates data input
+ * @return  Returns an NSArray if data was validated, nil otherwise
+ */
+-(NSArray*) validateDataInputFromDataSource:(NSArray*) src;
+/**
+ * Validates section cell identifiers
+ * @return True if valid, false otherwise
+ */
+-(BOOL) validateSectionCellIdentifiers:(NSArray*) sectionIDs;
+@end
+
 @implementation TLGenericTableViewDelegateAndDatasource
 
 #pragma mark - Public
@@ -44,10 +57,6 @@
 
 #pragma mark - Helper Methods
 
--(void) tableView:(UITableView *)tableView addActivityIndicatorForCell:(UITableViewCell*) cell
-{
-  
-}
 -(void) tableView:(UITableView *)tableView addActivityIndicatorForCellAtIndexPath:(NSIndexPath *)indexPath
 {
   // Get the cell at this index path
@@ -67,11 +76,7 @@
 
 #pragma mark - Input Validation
 
-/**
- * Validates data input
- * @return  Returns an NSArray if data was validated, nil otherwise
- */
--(NSArray*) validateDataInputFromDataSource:(NSArray*) src;
+-(NSArray*) validateDataInputFromDataSource:(NSArray*) src
 {
   NSMutableArray* loadData = [[NSMutableArray alloc] init];
   
@@ -101,10 +106,6 @@
   return loadData;
 }
 
-/**
- * Validates section cell identifiers
- * @return True if valid, false otherwise
- */
 -(BOOL) validateSectionCellIdentifiers:(NSArray*) sectionIDs
 {
   // One ID for each section

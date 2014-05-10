@@ -31,4 +31,17 @@
   return [self name];
 }
 
+-(NSString*) generatePTVOpenURL
+{
+  return [NSString stringWithFormat:
+          @"http://ptv.vic.gov.au/timetables/ModeSearchForm?Mode=2&Search=%@", self.name];
+}
+
+-(NSString*) generateMapURL
+{
+  return [NSString stringWithFormat:
+          @"http://maps.apple.com/?ll=%f,%f",
+          [self coordinate].latitude, [self coordinate].longitude];
+}
+
 @end

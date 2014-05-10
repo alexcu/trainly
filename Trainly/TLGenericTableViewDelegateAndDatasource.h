@@ -37,11 +37,4 @@
  */
 -(void) tableView:(UITableView*) tableView addActivityIndicatorForCellAtIndexPath:(NSIndexPath*) indexPath;
 
-/**
- * Makes a cell have an activity indicator
- * @param tableView The table view for to set the cell for
- * @param cell      Cell that the activity indicator should be set at
- */
--(void) tableView:(UITableView *)tableView addActivityIndicatorForCell:(UITableViewCell*) cell;
-
 @end

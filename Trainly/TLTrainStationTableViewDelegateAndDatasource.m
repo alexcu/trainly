@@ -59,7 +59,6 @@ static NSString* const PROTOTYPE_CELL_ID = @"PrototypeStationCell";
 #pragma mark - Setup
 
 - (id) initWithAnArrayOfStations:(NSArray *)stations
-              fromViewController:(UIViewController<TLViewPerformsStationGetInfoRequest>*)viewController
                    allowsEditing:(BOOL)editing
 {
   if (self = [super init])
@@ -184,6 +183,7 @@ static NSString* const PROTOTYPE_CELL_ID = @"PrototypeStationCell";
   // Set title of c
   [[c textLabel] setText:labelText];
   [c setAccessoryView:nil];
+  
   return c;
 }
 
@@ -212,6 +212,11 @@ static NSString* const PROTOTYPE_CELL_ID = @"PrototypeStationCell";
     }
     return retVal;
   }
+}
+
+-(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return _allowsEditing;
 }
 
 -(void) tableView:(UITableView*) tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

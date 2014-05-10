@@ -4,6 +4,8 @@
 static NSCache* cacheBank;
 /// The timeout in seconds
 const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
+/// Operation queue for concurrent requests
+static NSOperationQueue* operQueue;
 
 @interface TLURLRequest()
 /**
@@ -26,7 +28,7 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
 -(void) postSuccessNotificationWithData:(id) data;
 /**
  * Posts a failure notificiation with data to observers
- * @param data  The data to post success with
+ * @param error  The data to post error with
  */
 -(void) postFailureNotificationWithError:(id) error;
 @end
@@ -57,6 +59,7 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
   if (self == [TLURLRequest class])
   {
     cacheBank = [[NSCache alloc] init];
+    operQueue = [[NSOperationQueue alloc] init];
   }
 }
 
@@ -72,8 +75,14 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
                                                                 failureSelector:failureSelector
                                                                          sender:sender];
   // Start the request
-  [retVal performSelectorOnMainThread:@selector(startRequest)
-                           withObject:nil waitUntilDone:NO];
+  NSInvocationOperation* oper = [[NSInvocationOperation alloc] initWithTarget:retVal
+                                                                     selector:@selector(startRequest)
+                                                                       object:nil];
+  [operQueue addOperation:oper];
+  
+  // Perform in background not in main
+  //  [retVal performSelectorOnMainThread:@selector(startRequest)
+  //                           withObject:nil waitUntilDone:NO];
   
   return retVal;
 }
@@ -88,8 +97,14 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
                                                                 failureSelector:failureSelector
                                                                          sender:sender];
   // Start the request
-  [retVal performSelectorOnMainThread:@selector(startRequest)
-                           withObject:nil waitUntilDone:NO];
+  NSInvocationOperation* oper = [[NSInvocationOperation alloc] initWithTarget:retVal
+                                                                     selector:@selector(startRequest)
+                                                                       object:nil];
+  [operQueue addOperation:oper];
+  
+  // Perform in background not in main
+  //  [retVal performSelectorOnMainThread:@selector(startRequest)
+  //                           withObject:nil waitUntilDone:NO];
   
   return retVal;
 }
@@ -112,7 +127,8 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
                                                  name:[NSString stringWithFormat:@"%@FAILURE", url]
                                                object:self];
     _url = url;
-    _sender = sender;
+    // Retain sender
+    _sender = sender ;
     _recievedData = [[NSMutableData alloc] init];
     _cacheIdentifier = identifier;
     _expectedContentLength = 0;
@@ -148,6 +164,14 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
                                      timeoutInterval:TIMEOUT_SECONDS];
     _ctn = [NSURLConnection connectionWithRequest:req
                                          delegate:self];
+    // Ensure we're in the current run loop so delegates are called
+    // Note that this is running in a background operation in operQueue
+    // so it won't block the main thread if we have a while loop!
+    while (_ctn != nil)
+    {
+      [[NSRunLoop currentRunLoop]
+        runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
   }
 }
 
@@ -197,6 +221,9 @@ const static NSTimeInterval TIMEOUT_SECONDS = 3.5;
   else
     // ...failure? Then invoke fail with error
     [self postFailureNotificationWithError:jsonParseError];
+  
+  // Nilify connection to stop execution in main run loop
+  _ctn = nil;
 }
 
 -(void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

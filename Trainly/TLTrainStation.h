@@ -28,4 +28,15 @@
 /// Coordinates of this station
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
+/**
+ * Generates map url for the current map displayed
+ * @return The map link for the map displayed
+ */
+-(NSString*) generateMapURL;
+/**
+ * Generates a link to the PTV site for this station
+ * @return The link to this station
+ */
+-(NSString*) generatePTVOpenURL;
+
 @end

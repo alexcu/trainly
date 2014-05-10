@@ -16,16 +16,9 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
 @property (strong, nonatomic) IBOutlet UITableView *directionsTableView;
 /**
- * Success method for loading station data will set up _directionsTableViewDelegate
- * @param notification  The directions data notification
+ * Begins loading data for the station provided
  */
--(void) didSuccessfullyLoadDirectionData:(NSNotification*) notification;
-/**
- * Failure method for unsucessfully loading directions data
- * @param notification  The error message notification
- */
--(void) didFailLoadDirectionsData:(NSNotification*) notification;
-
+-(void) beginLoadingData;
 @end
 
 @implementation TLStationDirectionViewController
@@ -47,7 +40,11 @@
   [super viewDidLoad];
 
   [_navigationBar setTitle:[_trainStationData valueForKey:@"name"]];
+  [self beginLoadingData];
+}
 
+-(void) beginLoadingData
+{
   // Hide while we still load data
   [_directionsTableView setHidden:YES];
   [[self view] setHidden:NO];
@@ -56,9 +53,9 @@
   [TLViewLoaderSpinner loadSpinnerInView:[self view]];
   
   // Setup selectors
-  const SEL SUCCESS_SEL = @selector(didSuccessfullyLoadDirectionData:);
-  const SEL FAILURE_SEL = @selector(didFailLoadDirectionsData:);
-
+  const SEL SUCCESS_SEL = @selector(didSuccessfullyLoadTimetableData:);
+  const SEL FAILURE_SEL = @selector(didFailLoadTimetableData:);
+  
   // Load in the station directions from PTV
   [TLPTVRequest requestLinesForStopID:[_trainStationData valueForKey:@"stopID"]
                            successSel:SUCCESS_SEL
@@ -72,11 +69,13 @@
   // Dispose of any resources that can be recreated.
 }
 
--(void) didFailLoadDirectionsData:(NSNotification*) notification
+-(void) didFailLoadTimetableData:(NSNotification*) notification
 {
   // Kill the spinner
   [TLViewLoaderSpinner stopSpinner];
   NSError* error = [notification userInfo][@"data"];
+
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   // Lowercase the first letter in the error desc
   NSString* errorDesc = [[error userInfo] objectForKey:@"NSLocalizedDescription"];
@@ -93,18 +92,21 @@
   // Kill the spinner
   [TLViewLoaderSpinner stopSpinner];
   
-  // Unwind back to main view with alert message composed...
-  UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:@"Get Info" message:messageToDisplay
+  // Display retry error alert
+  UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:@"Get Timetable" message:messageToDisplay
                                                       delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:@"Retry", nil];
   [errorAlert show];
+  [errorAlert setDelegate:self];
 }
 
--(void) didSuccessfullyLoadDirectionData:(NSNotification*) notification
+-(void) didSuccessfullyLoadTimetableData:(NSNotification*) notification
 {
   // Kill the spinner
   NSArray* data = [notification userInfo][@"data"];
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   // Set the directions info
   _directionInfo = data;
@@ -128,6 +130,20 @@
   [_directionsTableView setDataSource:_directionsTableViewDelegate];
   [_directionsTableView reloadData];
 }
+
+#pragma mark - UIAlertViewDelegate
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  // Retry
+  if (buttonIndex == 1)
+    [self beginLoadingData];
+  // Cancel
+  if (buttonIndex == 0)
+    [self performSegueWithIdentifier:@"failedToGetStationInfo" sender:self];
+}
+
+#pragma mark - Navigation
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

@@ -54,6 +54,13 @@
  * @return                YES if it does, NO otherwise
  */
 -(BOOL) stationAlreadyPersistant:(TLTrainStation*)trainStation;
+/**
+ * Prepares the view passed in with a train station required
+ * @param view  The view that is this segue is about to go to.
+ *              Must implement TLTrainStationDisplayableView
+ * @param station The station to provide for this view
+ */
+-(void)segueForView:(TLViewUsesStationData*) view thatRequiresATrainStaion:(TLTrainStation*) station;
 @end
 
 @implementation TLMasterViewController
@@ -71,7 +78,6 @@
   _favouriteStations = [self loadFavouriteStations];
   _favouritesTableViewDelegate = [[TLTrainStationTableViewDelegateAndDatasource alloc]
                                   initWithAnArrayOfStations:_favouriteStations
-                                  fromViewController:self
                                   allowsEditing:YES];
   // Set the data source and delegate to the delegate defined above
   [_favouritesTableView setDataSource:_favouritesTableViewDelegate];
@@ -150,12 +156,7 @@
 
 #pragma mark - Push Segues
 
-/**
- * Prepares the view passed in with a train station required
- * @param view  The view that is this segue is about to go to.
- *              Must implement TLTrainStationDisplayableView
- */
--(void)segueForView:(TLViewUsesStationData*) view thatRequiresATrainStaion:(TLTrainStation*) station;
+-(void)segueForView:(TLViewUsesStationData*) view thatRequiresATrainStaion:(TLTrainStation*) station
 {
 
     // Set the title to the item that was just tapped

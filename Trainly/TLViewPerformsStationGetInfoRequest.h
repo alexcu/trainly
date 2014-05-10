@@ -1,8 +1,7 @@
 #import <Foundation/Foundation.h>
 /**
  * This protocol is for view controllers that must prepare
- * data for the next view when a get info icon on a train
- * station is tapped
+ * data and display information related to stations
  * @author  Alex Cummaudo
  * @date    2014-04-08
  */
