@@ -3,6 +3,7 @@
 #import "TLViewLoaderSpinner.h"
 #import "TLGenericTableViewDelegateAndDatasource.h"
 #import "TLPTVRequest.h"
+#import "TLTrainDepartViewController.h"
 @interface TLTimetableViewController ()
 {
   /// The controller/delegate
@@ -141,28 +142,23 @@
                                animated:YES];
 }
 
-#pragma mark - UITableViewDelegate protocol
+#pragma mark - Segue to next view
 
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-  // Find train departure time
-  NSDate* deptTime = [_departureTimes objectAtIndex:[indexPath row]][@"departureTime"];
-  // Setup notification on tap
-  UILocalNotification* notif = [[UILocalNotification alloc] init];
-  
-  NSDateFormatter* dateToPrettyStr = [[NSDateFormatter alloc] init];
-  [dateToPrettyStr setFormatterBehavior:NSDateFormatterBehavior10_4];
-  [dateToPrettyStr setDateStyle:NSDateFormatterNoStyle];
-  [dateToPrettyStr setTimeStyle:NSDateFormatterShortStyle];
-  
-  // Notification body
-  NSString* notifBody = [NSString stringWithFormat:@"The %@ %@ has left %@.",
-                         [dateToPrettyStr stringFromDate:deptTime],
-                         [_directionData objectForKey:@"direction_name"],
-                         [_trainStationData name]];
-  [notif setAlertBody:notifBody];
-  [notif setFireDate:deptTime];
-  [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+  if ([[segue identifier] isEqualToString:@"TrainDepart"])
+  {
+    NSInteger tappedIdx = [[_runTableView indexPathForSelectedRow] row];
+    
+    // Find train departure time
+    NSDate* deptTime = [_departureTimes objectAtIndex:tappedIdx][@"departureTime"];
+    
+    
+    TLTrainDepartViewController* dstView = (TLTrainDepartViewController*)[segue destinationViewController];
+    
+    [dstView provideViewWithStationData:_trainStationData];
+    [dstView setDepartureTime:deptTime];
+  }
 }
 
 @end

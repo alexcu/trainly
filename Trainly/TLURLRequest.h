@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
 /**
- * Wraps all network connection requests with
- * simple ways to use via NSSelectors
+ * Wraps all network connection requests to be parsed
+ * in JSON and run in the background
  * @author  Alex Cummaudo
  * @date    2014-04-07
  */

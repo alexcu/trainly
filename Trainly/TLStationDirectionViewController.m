@@ -4,10 +4,7 @@
 #import "TLPTVRequest.h"
 #import "TLViewLoaderSpinner.h"
 #import "TLTimetableViewController.h"
-/**
- * @author  Alex Cummaudo
- * @date    2014-03-28
- */
+
 @interface TLStationDirectionViewController ()
 {
   /// The table view delegate for the directions

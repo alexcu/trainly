@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "TLViewPerformsStationGetInfoRequest.h"
 /**
  * This protocol is for view controllers that must prepare
  * data for when they attempt to add a new favourite station

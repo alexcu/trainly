@@ -1,5 +1,12 @@
 #import <Foundation/Foundation.h>
 
+/**
+ * The loader spinner is a easy and convenient manager to
+ * add a UIActivityIndicatorView to the foreground of the
+ * front-most view.
+ * @author  Alex Cummaudo
+ * @date    2014-03-28
+ */
 @interface TLViewLoaderSpinner : NSObject
 {
   /// The spinner itself

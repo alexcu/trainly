@@ -7,10 +7,7 @@
 #import "TLSearchForStationViewController.h"
 #import "TLPTVRequest.h"
 #import "TLViewLoaderSpinner.h"
-/**
- * @author  Alex Cummaudo
- * @date    2014-03-28
- */
+
 @interface TLMasterViewController ()
 {
   /// The delegate for the favourites table view

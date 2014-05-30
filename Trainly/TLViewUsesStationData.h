@@ -7,6 +7,8 @@
  * information.
  * As such, when initialising this view, use this view's provideViewWithStationData:
  * method to provide the view with station data
+ * @author  Alex Cummaudo
+ * @date    2014-04-07
  */
 @interface TLViewUsesStationData : UIViewController
 {

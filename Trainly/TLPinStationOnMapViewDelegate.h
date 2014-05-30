@@ -14,6 +14,21 @@
   MKPointAnnotation* _pin;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Refocuses centrepoint on the pin
  */

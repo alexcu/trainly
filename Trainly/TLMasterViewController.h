@@ -5,6 +5,12 @@
 // Forward Declaration
 @class TLTrainStation;
 
+/**
+ * The master view controller of Trainly is the favourites view
+ * where all listed favourite train stations are kept.
+ * @author  Alex Cummaudo
+ * @date    2014-03-28
+ */
 @interface TLMasterViewController: UIViewController
   <TLViewPerformsAddingFavouriteStationRequest>
 {

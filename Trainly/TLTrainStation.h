@@ -1,15 +1,12 @@
-//
-//  TLTrainStation.h
-//  Trainly
-//
-//  Created by Alex on 5/04/2014.
-//  Copyright (c) 2014 Alex Cummaudo. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
 
+/**
+ * Model Train Station Object managed by CoreData
+ * @author  Alex Cummaudo
+ * @date    2014-04-07
+ */
 @interface TLTrainStation : NSManagedObject
 
 /// The latitude of this station

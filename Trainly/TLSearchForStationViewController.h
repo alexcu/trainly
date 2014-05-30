@@ -1,5 +1,8 @@
 #import <UIKit/UIKit.h>
 /**
+ * The Search for stations view gives the ability for users to search
+ * and find new favourite stations that they wish to add to the home
+ * screen view
  * @author  Alex Cummaudo
  * @date    2014-03-30
  */

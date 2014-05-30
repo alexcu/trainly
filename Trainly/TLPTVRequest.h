@@ -7,6 +7,7 @@
 /**
  * This class handles all requests made to the PTV
  * API backend. Use this class for all requests needed
+ * to PTV backend.
  * @author  Alex Cummaudo
  * @date    2014-03-23
  */

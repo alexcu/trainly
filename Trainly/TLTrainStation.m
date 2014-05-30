@@ -1,13 +1,4 @@
-//
-//  TLTrainStation.m
-//  Trainly
-//
-//  Created by Alex on 5/04/2014.
-//  Copyright (c) 2014 Alex Cummaudo. All rights reserved.
-//
-
 #import "TLTrainStation.h"
-
 
 @implementation TLTrainStation
 

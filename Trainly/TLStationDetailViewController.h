@@ -10,6 +10,9 @@
 #import <MessageUI/MessageUI.h>
 
 /**
+ * The station detail view controller lists all detailed information regarding
+ * a station, and allows social sharing and miscellaneous options on the provided
+ * station, such as opening the station on PTV's website or sharing on Facebook.
  * @author  Alex Cummaudo
  * @date    2014-03-30
  */
